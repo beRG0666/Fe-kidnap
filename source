@@ -1,0 +1,80 @@
+local Player = game.Players.LocalPlayer -- Clicktp without key
+local Mouse = Player:GetMouse()
+local UserInputService = game:GetService('UserInputService')
+ 
+local HoldingControl = false
+ 
+Mouse.Button1Down:connect(function()
+if HoldingControl then
+Player.Character:MoveTo(Mouse.Hit.p)
+end
+end) -- Clicktp without key
+ 
+UserInputService.InputBegan:connect(function(Input, Processed) -- Key
+if Input.UserInputType == Enum.UserInputType.Keyboard then
+if Input.KeyCode == Enum.KeyCode.Z then
+HoldingControl = true
+elseif Input.KeyCode == Enum.KeyCode.Z then
+HoldingControl = true
+end
+end
+end)
+ 
+UserInputService.InputEnded:connect(function(Input, Processed)
+if Input.UserInputType == Enum.UserInputType.Keyboard then
+if Input.KeyCode == Enum.KeyCode.Z then
+HoldingControl = false
+elseif Input.KeyCode == Enum.KeyCode.Z then
+HoldingControl = false
+end
+end
+end) -- Key
+ 
+wait (0.01)
+ 
+-- Equip a tool, and press z and click you you'r the victim
+game.Players.LocalPlayer:GetMouse().KeyDown:connect(function(key)
+if key == 'z' then
+local h = game.Players.LocalPlayer.Character.Humanoid:Clone()
+local plr = game.Players.LocalPlayer.Character
+local CF = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+local lp = game.Players.LocalPlayer
+ 
+h.Parent = game.Players.LocalPlayer.Character
+h.Name = "Hum"
+ 
+game.Players.LocalPlayer.Character.Humanoid:Destroy()
+ 
+for _,v in pairs(game.Players.LocalPlayer:GetDescendants()) do
+    if v.ClassName == "Tool" then
+        v.Parent = plr
+    end
+end
+wait(.5)
+tweenService, tweenInfo = game:GetService("TweenService"), TweenInfo.new(300, Enum.EasingStyle.Linear)
+ 
+tween = tweenService:Create(game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart, tweenInfo, {CFrame = CFrame.new(0, -1000, 0)})
+tween:Play()
+end
+end)
+local function callback(Text)
+ if Text == "Button1 text" then
+  print ("Answer")
+elseif Text == ("Button2 text") then
+ print ("Answer2")
+ end
+end
+
+local NotificationBindable = Instance.new("BindableFunction")
+NotificationBindable.OnInvoke = callback
+--
+game.StarterGui:SetCore("SendNotification",  {
+ Title = "Script Pabotaet";
+ Text = "Axyetb";
+ Icon = "";
+ Duration = 5;
+ Button1 = "Kpyto";
+ Button2 = "Pon";
+ Callback = NotificationBindable;
+})
+-- Created by beRG0666! Discord Carnec#5146
